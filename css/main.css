@@ -4,8 +4,9 @@
 }
 
 #map {
-    width: 100%;
+    width: 80%;
     height: 100vh;
+    margin-left: 140px;
     border: 2px solid black;
 }
 
@@ -24,4 +25,7 @@ button {
 
 button:hover, button:focus {
     outline: 0;
+}
+h2{
+    text-align: center;
 }

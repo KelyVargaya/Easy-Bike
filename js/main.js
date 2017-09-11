@@ -1,16 +1,15 @@
 
 const DatoGlobal = {
 
-    variables:{
+    variables: {
         latitud: undefined,
         longitud: undefined,
         map: undefined
         //valores: undefined
         
     },
-
     init: function (){
-        DatoGlobal.variables.map = new google.maps.Map($("#map"),{
+        DatoGlobal.variables.map = new google.maps.Map($("#map")[0],{
         //DatoGlobal.valores = {
             zoom: 7,
             center: { lat: -9.1191427, lng: -77.0349046 },
@@ -20,19 +19,17 @@ const DatoGlobal = {
         });
 
        // DatoGlobal.variables.map = new google.maps.Map(DatoGlobal.map);
-        DatoGlobal.guardar();
+        DatoGlobal.setup();
     },
-    
-
-    guardar: function(){
+    setup: function(){
         $("#encuentrame").click (DatoGlobal.buscar);
     },
+
     buscar :function(){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(DatoGlobal.exito, DatoGlobal.error);
         }
     },
-
     exito: function(posicion){
         
         DatoGlobal.variables.latitud = posicion.coords.latitude;
@@ -44,13 +41,9 @@ const DatoGlobal = {
             map: map
         });
         DatoGlobal.variables.map.setZoom(17);
-        DatoGlobal.variables.map.setCenter({ 
-            lat: DatoGlobal.variables.latitud, 
-            lng: DatoGlobal.variables.longitud });
+        DatoGlobal.variables.map.setCenter({ lat: DatoGlobal.variables.latitud, lng: DatoGlobal.variables.longitud });
     },
-
-    Error: function(){
-
+    error: function(){
         alert("Tenemos un  problema cn encontrar tu ubicacion");
     }
     
