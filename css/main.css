@@ -10,6 +10,9 @@
     border: 2px solid black;
 }
 
+p{
+    text-align: center;
+}
 button {
     margin: 15px auto;
     padding: 10px 15px;

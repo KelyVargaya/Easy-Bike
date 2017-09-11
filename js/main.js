@@ -4,11 +4,12 @@ const DatoGlobal = {
     variables: {
         latitud: undefined,
         longitud: undefined,
-        map: undefined
+        map: undefined,
+        miUbicacion: undefined
         //valores: undefined
         
     },
-    init: function (){
+    Init: function (){
         DatoGlobal.variables.map = new google.maps.Map($("#map")[0],{
         //DatoGlobal.valores = {
             zoom: 7,
@@ -19,23 +20,20 @@ const DatoGlobal = {
         });
 
        // DatoGlobal.variables.map = new google.maps.Map(DatoGlobal.map);
-        DatoGlobal.setup();
+        DatoGlobal.Setup();
     },
-    setup: function(){
-        $("#encuentrame").click (DatoGlobal.buscar);
+    Setup: function(){
+        $("#encuentrame").click (DatoGlobal.Buscar);
     },
-
-    buscar :function(){
+    Buscar :function(){
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(DatoGlobal.exito, DatoGlobal.error);
+            navigator.geolocation.getCurrentPosition(DatoGlobal.Exito, DatoGlobal.Error);
         }
     },
-    exito: function(posicion){
-        
+    Exito: function(posicion){
         DatoGlobal.variables.latitud = posicion.coords.latitude;
         DatoGlobal.variables.longitud = posicion.coords.longitude;
-
-        var miUbicacion = new google.maps.Marker({
+        DatoGlobal.variables.miUbicacion = new google.maps.Marker({
             position: { lat: DatoGlobal.variables.latitud, lng: DatoGlobal.variables.longitud },
             animation: google.maps.Animation.DROP,
             map: map
@@ -43,16 +41,22 @@ const DatoGlobal = {
         DatoGlobal.variables.map.setZoom(17);
         DatoGlobal.variables.map.setCenter({ lat: DatoGlobal.variables.latitud, lng: DatoGlobal.variables.longitud });
     },
-    error: function(){
+    Error: function(){
         alert("Tenemos un  problema cn encontrar tu ubicacion");
     }
     
 };
-$(document).ready(DatoGlobal.init);
+ 
+
+function initMap(){
+    DatoGlobal.Init () ;
+}
+
+/************Codigo con JS************
 
 
 
-/*function initMap(){
+function initMap(){
     var map = new google.maps.Map($("#map")[0],{
         zoom: 7,
         center: {lat: -9.1191427, lng: -77.0349046},
